@@ -71,16 +71,16 @@ class Canvas extends JPanel implements Runnable
   {
     m_startPoints = new Vector<Point>();
 
-//    m_startPoints.add(new Point((m_img.getWidth()-1)/2, 0                   ));
-//    m_startPoints.add(new Point(0                     , m_img.getHeight()-1 ));
-//    m_startPoints.add(new Point(m_img.getWidth()-1    , m_img.getHeight()-1 ));
+    m_startPoints.add(new Point((m_img.getWidth()-1)/2, 0                   ));
+    m_startPoints.add(new Point(0                     , m_img.getHeight()-1 ));
+    m_startPoints.add(new Point(m_img.getWidth()-1    , m_img.getHeight()-1 ));
 
 
-    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.19098301), (int)((double)m_img.getHeight() * 0.55901668)) );
-    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.80901699), (int)((double)m_img.getHeight() * 0.55901668)) );
-    m_startPoints.add(new Point(m_img.getWidth()             ,                (int)((double)m_img.getHeight() * 0.19098301)) );
-    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.5)       , 0        ) );
-    m_startPoints.add(new Point(0                            , (int)((double)m_img.getHeight() * 0.19098301)) );
+//    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.19098301), (int)((double)m_img.getHeight() * 0.55901668)) );
+//    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.80901699), (int)((double)m_img.getHeight() * 0.55901668)) );
+//    m_startPoints.add(new Point(m_img.getWidth()             ,                (int)((double)m_img.getHeight() * 0.19098301)) );
+//    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.5)       , 0        ) );
+//    m_startPoints.add(new Point(0                            , (int)((double)m_img.getHeight() * 0.19098301)) );
 
     setupCanvas();
 
@@ -109,17 +109,5 @@ class Canvas extends JPanel implements Runnable
         break;
       }
     }
-  }
-
-  // Gives a set of vertices (radius 1) around the origin
-  public static Vector<Point> getVertices(int sides)
-  {
-    Vector<Point> points = new Vector<Point>();
-    for (int i = 0; i < sides; i++)
-    {
-      double angle = i * 2 * pi / sides;
-      points.add( new Point( Math.sin(angle) , Math.cos(angle) );
-    }
-    return points;
   }
 }
