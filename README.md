@@ -7,3 +7,15 @@ FRACTALS!
 ## Things I'd like to do:
 - Make all hard-coded parameters optional and configurable in the GUI.  This can be should in the "Left Pane".  
 - Generalize the number of vertices.  3 Verticies are hard-coded.  I also tested with 5 vertices (you can see them commented out).  I'd like to be able to select an arbitrary number of vertices from the left pane.   
+
+## To build
+
+```
+$ javac -d bin src/*.java
+```
+
+## To run
+```
+$ cd src
+$ java Main
+```
