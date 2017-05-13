@@ -19,3 +19,7 @@ $ javac -d bin src/*.java
 $ cd bin
 $ java Main
 ```
+
+## Screenshot
+
+![Screenshot](./img/screenshot.png?raw=true "Screenshot")
