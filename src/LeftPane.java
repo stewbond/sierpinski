@@ -4,6 +4,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 
 public class LeftPane extends JPanel
 {
@@ -23,7 +24,7 @@ public class LeftPane extends JPanel
 
   public LeftPane(ActionListener _parent)
   {
-    delayLbl = new JLabel("Iterationperiod (ms)");
+    delayLbl = new JLabel("Iteration period (ms)");
     delayBox = new JTextField("10");
     ptspiLbl = new JLabel("Points per iteration");
     ptspiBox = new JTextField("10");
@@ -38,6 +39,15 @@ public class LeftPane extends JPanel
     m_go     = new JButton("Start");
 
     m_go.addActionListener(_parent);
+
+    Dimension maxSize = delayBox.getMaximumSize();
+    maxSize.height = 25;
+    delayBox.setMaximumSize(maxSize);
+    ptspiBox.setMaximumSize(maxSize);
+    pointBox.setMaximumSize(maxSize);
+    widthBox.setMaximumSize(maxSize);
+    heigtBox.setMaximumSize(maxSize);
+    pixelBox.setMaximumSize(maxSize);
 
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     this.add(delayLbl);
