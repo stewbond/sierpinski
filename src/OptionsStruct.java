@@ -10,6 +10,7 @@ public class OptionsStruct
 
   public final static int ALGO_VANILLA   = 0;
   public final static int ALGO_CLOCKWISE = 1;
+  public final static int ALGO_NODUPS    = 2;
 
   public OptionsStruct()
   {
@@ -19,6 +20,6 @@ public class OptionsStruct
     pixelSize = 1.0f;
     pointsperiter = 10;
     dt = 10;
-    algorithm = ALGO_CLOCKWISE;
+    algorithm = ALGO_NODUPS;
   }
 }

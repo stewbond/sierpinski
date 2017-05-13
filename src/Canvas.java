@@ -63,6 +63,9 @@ class Canvas extends JPanel implements Runnable
       case OptionsStruct.ALGO_CLOCKWISE:
         m_algo = new Clockwise();
         break;
+      case OptionsStruct.ALGO_NODUPS:
+        m_algo = new NoDups();
+        break;
       case OptionsStruct.ALGO_VANILLA:
       default:
         m_algo = new Vanilla();

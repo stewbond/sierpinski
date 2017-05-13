@@ -35,16 +35,4 @@ public class Vanilla extends Algorithm
 
     return m_lastPoint;
   }
-
-  private Vector<Point> generatePoints(int number, double radius)
-  {
-    Vector<Point> points = new Vector<Point>();
-    for (int i = 0; i < number; i++)
-    {
-      double angle = i * 2 * Math.PI / (double)number; // Ensure this is floating point
-      points.add(new Point( (int)(Math.sin(angle) * (double)radius),
-                            (int)(Math.cos(angle) * (double)radius )));
-    }
-    return points;
-  }
 }
