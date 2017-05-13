@@ -25,11 +25,6 @@ class Canvas extends JPanel implements Runnable
 
   public Canvas()
   {
-    // Default option values:
-    m_dt            = 1;
-    m_pixelsize     = 1.0f;
-    m_pixelsperiter = 10;
-
     m_rng = new Random();
     setupCanvas(1000, 1000);
 
@@ -38,7 +33,7 @@ class Canvas extends JPanel implements Runnable
 
     add(m_container);
 
-    repaint(); // Maybe put this earlier
+    repaint();
   }
 
   private void setupCanvas(int width, int height)

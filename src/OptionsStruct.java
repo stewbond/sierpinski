@@ -7,7 +7,7 @@ public class OptionsStruct
   public int   pointsperiter;
   public int   dt;
 
-  OptionsStruct()
+  public OptionsStruct()
   {
     width  = 1000;
     height = 1000;
