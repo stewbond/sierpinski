@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.Vector;
 import java.util.Random;
+import java.lang.Math;
 
 class Canvas extends JPanel implements Runnable
 {
@@ -85,13 +86,16 @@ class Canvas extends JPanel implements Runnable
       m_startPoints.add(new Point(0                     , m_img.getHeight()-1 ));
       m_startPoints.add(new Point(m_img.getWidth()-1    , m_img.getHeight()-1 ));
     }
-    else if (vertices == 5)
+    else
     {
-      m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.19098301), (int)((double)m_img.getHeight() * 0.55901668)) );
-      m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.80901699), (int)((double)m_img.getHeight() * 0.55901668)) );
-      m_startPoints.add(new Point(m_img.getWidth()             ,                (int)((double)m_img.getHeight() * 0.19098301)) );
-      m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.5)       , 0        ) );
-      m_startPoints.add(new Point(0                            , (int)((double)m_img.getHeight() * 0.19098301)) );
+      double radius = Math.min(m_img.getWidth(), m_img.getHeight() ) / 2.0;
+      Vector<Point> points = generatePoints(vertices, radius);
+      for (int i = 0; i < points.size(); i++)
+      {
+        Point point = points.elementAt(i);
+        m_startPoints.add(new Point( (int)(point.x + radius) ,
+                                     (int)(point.y + radius) ));
+      }
     }
 
     m_lastPoint = new Point(m_rng.nextInt() % m_img.getWidth()  ,
@@ -119,5 +123,17 @@ class Canvas extends JPanel implements Runnable
         break;
       }
     }
+  }
+
+  private Vector<Point> generatePoints(int number, double radius)
+  {
+    Vector<Point> points = new Vector<Point>();
+    for (int i = 0; i < number; i++)
+    {
+      double angle = i * 2 * Math.PI / (double)number; // Ensure this is floating point
+      points.add(new Point( (int)(Math.sin(angle) * (double)radius),
+                            (int)(Math.cos(angle) * (double)radius )));
+    }
+    return points;
   }
 }
