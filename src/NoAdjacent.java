@@ -2,9 +2,9 @@ import java.awt.Point;
 import java.util.Vector;
 import java.util.Random;
 
-public class Clockwise extends NoDups
+public class NoAdjacent extends NoDups
 {
-  public Clockwise()
+  public NoAdjacent()
   {
     super();
   }
@@ -12,8 +12,9 @@ public class Clockwise extends NoDups
   public Point Step(OptionsStruct os)
   {
     int nextSelection = Math.abs( m_rng.nextInt() ) % m_startPoints.size() ;
-    while( nextSelection == m_lastSelection ||
-           nextSelection == (m_lastSelection + 1)%m_startPoints.size() )
+    while( nextSelection ==  m_lastSelection                                ||
+           nextSelection == (m_lastSelection + 1) %m_startPoints.size()      ||
+           nextSelection == (m_lastSelection + m_startPoints.size() - 1) % m_startPoints.size() )
     {
       nextSelection = Math.abs( m_rng.nextInt() ) % m_startPoints.size();
     }

@@ -26,9 +26,7 @@ $ java Main
 ## Extensions to do
 
 - It would be fun to define a set of additional rules to The Chaos Game:
- -- You can't select the same vertex twice.
- -- You can't select the next clockwise vertex.
- -- You can't select an ajacent vertex (5 or larger)
- -- You can't select a vertex opposite (n/2 distance) from the previous one.
- -- You can't select a vertex 1 or n-1 spots away from the previous two selected vertices respectively. (Where n is the number of vertices)
+-- You can't select a vertex opposite (n/2 distance) from the previous one.
+-- You can't select a vertex 1 or n-1 spots away from the previous two selected vertices respectively. (Where n is the number of vertices)
+- Extend the GUI to allow us to select which algorithm we want (Combo box)
 - Imagine if we could change this so that the user could define their own rules without a need to recompile!

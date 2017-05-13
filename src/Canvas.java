@@ -66,6 +66,9 @@ class Canvas extends JPanel implements Runnable
       case OptionsStruct.ALGO_NODUPS:
         m_algo = new NoDups();
         break;
+      case OptionsStruct.ALGO_NOADJACENT:
+        m_algo = new NoAdjacent();
+        break;
       case OptionsStruct.ALGO_VANILLA:
       default:
         m_algo = new Vanilla();
