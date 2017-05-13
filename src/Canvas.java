@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.Vector;
-import java.util.Random;
 import java.lang.Math;
 
 class Canvas extends JPanel implements Runnable
@@ -17,21 +16,20 @@ class Canvas extends JPanel implements Runnable
   private JLabel m_container;
   private Vector<Point> m_startPoints;
   private Point m_lastPoint;
-  private Random m_rng;
   private Thread m_animator;
-  private int   m_dt;
-  private float m_pixelsize;
-  private int   m_pixelsperiter;
+  private Algorithm m_algo;
+  private OptionsStruct m_os;
 
   public Canvas()
   {
-    m_rng = new Random();
     setupCanvas(1000, 1000);
 
     m_container = new JLabel(new ImageIcon());
     m_container.setIcon(new ImageIcon(m_img));
 
     add(m_container);
+
+    m_algo = new Algorithm();
 
     repaint();
   }
@@ -48,7 +46,7 @@ class Canvas extends JPanel implements Runnable
   protected void addPixel(Point end)
   {
     Graphics2D g2 = m_img.createGraphics();
-    g2.setStroke( new BasicStroke(m_pixelsize) );
+    g2.setStroke( new BasicStroke(m_os.pixelSize) );
     g2.setPaint(  new Color(0,0,0) );
     g2.draw(new Line2D.Float( (float)end.x, (float)end.y, (float)end.x, (float)end.y ));
     m_container.setIcon(new ImageIcon(m_img));
@@ -56,46 +54,24 @@ class Canvas extends JPanel implements Runnable
 
   protected void nextPixel()
   {
-    for (int j = 0; j < m_pixelsperiter; j++)
+    for (int j = 0; j < m_os.pointsperiter; j++)
     {
-      int i = java.lang.Math.abs(m_rng.nextInt()) % m_startPoints.size();
-      m_lastPoint = new Point( (m_startPoints.elementAt(i).x - m_lastPoint.x) / 2 + m_lastPoint.x,
-                               (m_startPoints.elementAt(i).y - m_lastPoint.y) / 2 + m_lastPoint.y);
-      addPixel(m_lastPoint);
+      addPixel(m_algo.Step(m_os));
     }
     repaint();
   }
 
-  public void go(OptionsStruct os)
+  public void go(OptionsStruct os) // Start a new sequence.
   {
+    m_os = os;
     setupCanvas(os.width, os.height);
-    m_pixelsize     = os.pixelSize;
-    m_pixelsperiter = os.pointsperiter;
-    m_dt            = os.dt;
 
-    m_startPoints = new Vector<Point>();
+    Vector<Point> pts = m_algo.Initialize(os);
 
-    if (os.startPoints == 3)
+    for(int i = 0; i < pts.size(); i++) // Add initial elements
     {
-      m_startPoints.add(new Point((m_img.getWidth()-1)/2, 0                   ));
-      m_startPoints.add(new Point(0                     , m_img.getHeight()-1 ));
-      m_startPoints.add(new Point(m_img.getWidth()-1    , m_img.getHeight()-1 ));
+      addPixel( pts.elementAt(i) );
     }
-    else
-    {
-      double radius = Math.min(m_img.getWidth(), m_img.getHeight() ) / 2.0;
-      Vector<Point> points = generatePoints(os.startPoints, radius);
-      for (int i = 0; i < points.size(); i++)
-      {
-        Point point = points.elementAt(i);
-        m_startPoints.add(new Point( (int)(point.x + radius) ,
-                                     (int)(point.y + radius) ));
-      }
-    }
-
-    m_lastPoint = new Point(m_rng.nextInt() % m_img.getWidth()  ,
-                            m_rng.nextInt() % m_img.getHeight() );
-    addPixel(m_lastPoint);
 
     repaint();
     m_animator = new Thread(this);
@@ -110,7 +86,7 @@ class Canvas extends JPanel implements Runnable
       nextPixel();
       try
       {
-        tm += m_dt;
+        tm += m_os.dt;
         Thread.sleep(Math.max(0, tm - System.currentTimeMillis() ) );
       }
       catch (InterruptedException e)
@@ -118,17 +94,5 @@ class Canvas extends JPanel implements Runnable
         break;
       }
     }
-  }
-
-  private Vector<Point> generatePoints(int number, double radius)
-  {
-    Vector<Point> points = new Vector<Point>();
-    for (int i = 0; i < number; i++)
-    {
-      double angle = i * 2 * Math.PI / (double)number; // Ensure this is floating point
-      points.add(new Point( (int)(Math.sin(angle) * (double)radius),
-                            (int)(Math.cos(angle) * (double)radius )));
-    }
-    return points;
   }
 }
