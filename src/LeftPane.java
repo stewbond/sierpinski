@@ -8,18 +8,12 @@ import java.awt.Dimension;
 
 public class LeftPane extends JPanel
 {
-  JLabel     delayLbl;
-  JTextField delayBox;
-  JLabel     ptspiLbl;
-  JTextField ptspiBox;
-  JLabel     pointLbl;
-  JTextField pointBox;
-  JLabel     widthLbl;
-  JTextField widthBox;
-  JLabel     heigtLbl;
-  JTextField heigtBox;
-  JLabel     pixelLbl;
-  JTextField pixelBox;
+  JLabel     delayLbl;  JTextField delayBox;
+  JLabel     ptspiLbl;  JTextField ptspiBox;
+  JLabel     pointLbl;  JTextField pointBox;
+  JLabel     widthLbl;  JTextField widthBox;
+  JLabel     heigtLbl;  JTextField heigtBox;
+  JLabel     pixelLbl;  JTextField pixelBox;
   JButton    m_go;
 
   public LeftPane(ActionListener _parent)
@@ -50,18 +44,12 @@ public class LeftPane extends JPanel
     pixelBox.setMaximumSize(maxSize);
 
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    this.add(delayLbl);
-    this.add(delayBox);
-    this.add(ptspiLbl);
-    this.add(ptspiBox);
-    this.add(pointLbl);
-    this.add(pointBox);
-    this.add(widthLbl);
-    this.add(widthBox);
-    this.add(heigtLbl);
-    this.add(heigtBox);
-    this.add(pixelLbl);
-    this.add(pixelBox);
+    this.add(delayLbl);    this.add(delayBox);
+    this.add(ptspiLbl);    this.add(ptspiBox);
+    this.add(pointLbl);    this.add(pointBox);
+    this.add(widthLbl);    this.add(widthBox);
+    this.add(heigtLbl);    this.add(heigtBox);
+    this.add(pixelLbl);    this.add(pixelBox);
 
     this.add(m_go);
   }
