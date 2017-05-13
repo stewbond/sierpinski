@@ -58,7 +58,14 @@ class Canvas extends JPanel implements Runnable
 
   public void go(OptionsStruct os) // Start a new sequence.
   {
-    m_algo = new Vanilla();
+    switch (os.algorithm)
+    {
+      case OptionsStruct.ALGO_VANILLA:
+      default:
+        m_algo = new Vanilla();
+        break;
+    }
+
     m_os = os;
     setupCanvas(os.width, os.height);
 

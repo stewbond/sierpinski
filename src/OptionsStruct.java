@@ -6,6 +6,9 @@ public class OptionsStruct
   public float pixelSize;
   public int   pointsperiter;
   public int   dt;
+  public int   algorithm;
+
+  public final static int ALGO_VANILLA = 0;
 
   public OptionsStruct()
   {
@@ -15,5 +18,6 @@ public class OptionsStruct
     pixelSize = 1.0f;
     pointsperiter = 10;
     dt = 10;
+    algorithm = ALGO_VANILLA;
   }
 }
