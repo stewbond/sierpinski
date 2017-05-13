@@ -5,7 +5,7 @@ public class Main
   public static void main(String[] argv)
   {
     JFrame f = new MainFrame("Sierpinski");
-    f.setTitle("Let's draw dots!");
+    f.setTitle("The Chaos Game");
     f.pack();
     f.setSize(1200,1035);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
