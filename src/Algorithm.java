@@ -38,8 +38,8 @@ public abstract class Algorithm
     for (int i = 0; i < number; i++)
     {
       double angle = i * 2 * Math.PI / (double)number; // Ensure this is floating point
-      points.add(new Point( (int)(Math.sin(angle) * (double)radius),
-                            (int)(Math.cos(angle) * (double)radius )));
+      points.add(new Point( (int)(Math.sin(angle) * radius),
+                            (int)(Math.cos(angle) * radius )));
     }
     return points;
   }

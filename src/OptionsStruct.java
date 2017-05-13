@@ -9,9 +9,9 @@ public class OptionsStruct
   public int   algorithm;
 
   public final static int ALGO_VANILLA   = 0;
-  public final static int ALGO_CLOCKWISE = 1;
-  public final static int ALGO_NODUPS    = 2;
-  public final static int ALGO_NOADJACENT= 4;
+  public final static int ALGO_NODUPS    = 1;
+  public final static int ALGO_CLOCKWISE = 2;
+  public final static int ALGO_NOADJACENT= 3;
 
   public OptionsStruct()
   {
@@ -21,6 +21,6 @@ public class OptionsStruct
     pixelSize = 1.0f;
     pointsperiter = 10;
     dt = 10;
-    algorithm = ALGO_NOADJACENT;
+    algorithm = ALGO_VANILLA;
   }
 }
