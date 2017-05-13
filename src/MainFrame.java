@@ -21,12 +21,6 @@ public class MainFrame extends JFrame implements ActionListener
 
   public void actionPerformed(ActionEvent event)
   {
-    canvas.go(leftPanel.getCanvasWidth(),
-              leftPanel.getCanvasHeight(),
-              leftPanel.getStartPoints(),
-              leftPanel.getPixelSize(),
-              leftPanel.getPointsPerIter(),
-              leftPanel.getIter()
-              );
+    canvas.go(leftPanel.getOptions());
   }
 }

@@ -66,76 +66,19 @@ public class LeftPane extends JPanel
     this.add(m_go);
   }
 
-  public int getIter()
+  public OptionsStruct getOptions()
   {
+    OptionsStruct os = new OptionsStruct();
     try
     {
-      return Integer.parseInt( delayBox.getText() );
+      os.width         = Integer.parseInt( widthBox.getText() );
+      os.height        = Integer.parseInt( heigtBox.getText() );
+      os.startPoints   = Integer.parseInt( pointBox.getText() );
+      os.pixelSize     = Float.parseFloat( pixelBox.getText() );
+      os.pointsperiter = Integer.parseInt( ptspiBox.getText() );
+      os.dt            = Integer.parseInt( delayBox.getText() );
     }
-    catch(NumberFormatException execp)
-    {
-      return 10;
-    }
+    catch(NumberFormatException execp) {  }
+    return os;
   }
-
-  public int getPointsPerIter()
-  {
-    try
-    {
-      return Integer.parseInt( ptspiBox.getText() );
-    }
-    catch(NumberFormatException execp)
-    {
-      return 10;
-    }
-  }
-
-  public int getStartPoints()
-  {
-    try
-    {
-      return Integer.parseInt( pointBox.getText() );
-    }
-    catch(NumberFormatException execp)
-    {
-      return 3;
-    }
-  }
-
-  public int getCanvasWidth()
-  {
-    try
-    {
-      return Integer.parseInt( widthBox.getText() );
-    }
-    catch(NumberFormatException execp)
-    {
-      return 1000;
-    }
-  }
-
-  public int getCanvasHeight()
-  {
-    try
-    {
-      return Integer.parseInt( heigtBox.getText() );
-    }
-    catch(NumberFormatException execp)
-    {
-      return 1000;
-    }
-  }
-
-  public float getPixelSize()
-  {
-    try
-    {
-      return Float.parseFloat( pixelBox.getText() );
-    }
-    catch(NumberFormatException execp)
-    {
-      return 1.0f;
-    }
-  }
-
 }

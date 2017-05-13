@@ -71,16 +71,16 @@ class Canvas extends JPanel implements Runnable
     repaint();
   }
 
-  public void go(int width, int height, int vertices, float pixelsize, int pointperiter, int dt)
+  public void go(OptionsStruct os)
   {
-    setupCanvas(width, height);
-    m_pixelsize = pixelsize;
-    m_pixelsperiter = pointperiter;
-    m_dt = dt;
+    setupCanvas(os.width, os.height);
+    m_pixelsize     = os.pixelSize;
+    m_pixelsperiter = os.pointsperiter;
+    m_dt            = os.dt;
 
     m_startPoints = new Vector<Point>();
 
-    if (vertices == 3)
+    if (os.startPoints == 3)
     {
       m_startPoints.add(new Point((m_img.getWidth()-1)/2, 0                   ));
       m_startPoints.add(new Point(0                     , m_img.getHeight()-1 ));
@@ -89,7 +89,7 @@ class Canvas extends JPanel implements Runnable
     else
     {
       double radius = Math.min(m_img.getWidth(), m_img.getHeight() ) / 2.0;
-      Vector<Point> points = generatePoints(vertices, radius);
+      Vector<Point> points = generatePoints(os.startPoints, radius);
       for (int i = 0; i < points.size(); i++)
       {
         Point point = points.elementAt(i);
