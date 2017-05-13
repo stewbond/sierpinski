@@ -18,16 +18,19 @@ class Canvas extends JPanel implements Runnable
   private Point m_lastPoint;
   private Random m_rng;
   private Thread m_animator;
-  private final static int   DELAY           = 1;
-  private final static float PIXELSIZE       = 1.0f;
-  private final static int   PIXELS_PER_ITER = 10;
-  private final static int   CANVAS_WIDTH    = 1000;
-  private final static int   CANVAS_HEIGHT   = 1000;
+  private int   m_dt;
+  private float m_pixelsize;
+  private int   m_pixelsperiter;
 
   public Canvas()
   {
+    // Default option values:
+    m_dt            = 1;
+    m_pixelsize     = 1.0f;
+    m_pixelsperiter = 10;
+
     m_rng = new Random();
-    setupCanvas();
+    setupCanvas(1000, 1000);
 
     m_container = new JLabel(new ImageIcon());
     m_container.setIcon(new ImageIcon(m_img));
@@ -37,9 +40,9 @@ class Canvas extends JPanel implements Runnable
     repaint(); // Maybe put this earlier
   }
 
-  private void setupCanvas()
+  private void setupCanvas(int width, int height)
   {
-    m_img = new BufferedImage( CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_INT_ARGB );
+    m_img = new BufferedImage( width, height, BufferedImage.TYPE_INT_ARGB );
 
     Graphics2D g = m_img.createGraphics();
     g.setPaint( new Color(255,255,255) );
@@ -49,7 +52,7 @@ class Canvas extends JPanel implements Runnable
   protected void addPixel(Point end)
   {
     Graphics2D g2 = m_img.createGraphics();
-    g2.setStroke( new BasicStroke(PIXELSIZE) );
+    g2.setStroke( new BasicStroke(m_pixelsize) );
     g2.setPaint(  new Color(0,0,0) );
     g2.draw(new Line2D.Float( (float)end.x, (float)end.y, (float)end.x, (float)end.y ));
     m_container.setIcon(new ImageIcon(m_img));
@@ -57,7 +60,7 @@ class Canvas extends JPanel implements Runnable
 
   protected void nextPixel()
   {
-    for (int j = 0; j < PIXELS_PER_ITER; j++)
+    for (int j = 0; j < m_pixelsperiter; j++)
     {
       int i = java.lang.Math.abs(m_rng.nextInt()) % m_startPoints.size();
       m_lastPoint = new Point( (m_startPoints.elementAt(i).x - m_lastPoint.x) / 2 + m_lastPoint.x,
@@ -67,22 +70,29 @@ class Canvas extends JPanel implements Runnable
     repaint();
   }
 
-  public void go()
+  public void go(int width, int height, int vertices, float pixelsize, int pointperiter, int dt)
   {
+    setupCanvas(width, height);
+    m_pixelsize = pixelsize;
+    m_pixelsperiter = pointperiter;
+    m_dt = dt;
+
     m_startPoints = new Vector<Point>();
 
-    m_startPoints.add(new Point((m_img.getWidth()-1)/2, 0                   ));
-    m_startPoints.add(new Point(0                     , m_img.getHeight()-1 ));
-    m_startPoints.add(new Point(m_img.getWidth()-1    , m_img.getHeight()-1 ));
-
-
-//    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.19098301), (int)((double)m_img.getHeight() * 0.55901668)) );
-//    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.80901699), (int)((double)m_img.getHeight() * 0.55901668)) );
-//    m_startPoints.add(new Point(m_img.getWidth()             ,                (int)((double)m_img.getHeight() * 0.19098301)) );
-//    m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.5)       , 0        ) );
-//    m_startPoints.add(new Point(0                            , (int)((double)m_img.getHeight() * 0.19098301)) );
-
-    setupCanvas();
+    if (vertices == 3)
+    {
+      m_startPoints.add(new Point((m_img.getWidth()-1)/2, 0                   ));
+      m_startPoints.add(new Point(0                     , m_img.getHeight()-1 ));
+      m_startPoints.add(new Point(m_img.getWidth()-1    , m_img.getHeight()-1 ));
+    }
+    else if (vertices == 5)
+    {
+      m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.19098301), (int)((double)m_img.getHeight() * 0.55901668)) );
+      m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.80901699), (int)((double)m_img.getHeight() * 0.55901668)) );
+      m_startPoints.add(new Point(m_img.getWidth()             ,                (int)((double)m_img.getHeight() * 0.19098301)) );
+      m_startPoints.add(new Point((int)((double)m_img.getWidth() * 0.5)       , 0        ) );
+      m_startPoints.add(new Point(0                            , (int)((double)m_img.getHeight() * 0.19098301)) );
+    }
 
     m_lastPoint = new Point(m_rng.nextInt() % m_img.getWidth()  ,
                             m_rng.nextInt() % m_img.getHeight() );
@@ -101,7 +111,7 @@ class Canvas extends JPanel implements Runnable
       nextPixel();
       try
       {
-        tm += DELAY;
+        tm += m_dt;
         Thread.sleep(Math.max(0, tm - System.currentTimeMillis() ) );
       }
       catch (InterruptedException e)
