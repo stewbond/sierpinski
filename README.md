@@ -16,6 +16,6 @@ $ javac -d bin src/*.java
 
 ## To run
 ```
-$ cd src
+$ cd bin
 $ java Main
 ```
