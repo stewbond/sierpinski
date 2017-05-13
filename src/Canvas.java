@@ -14,8 +14,6 @@ class Canvas extends JPanel implements Runnable
 {
   private BufferedImage m_img;
   private JLabel m_container;
-  private Vector<Point> m_startPoints;
-  private Point m_lastPoint;
   private Thread m_animator;
   private Algorithm m_algo;
   private OptionsStruct m_os;
@@ -26,10 +24,7 @@ class Canvas extends JPanel implements Runnable
 
     m_container = new JLabel(new ImageIcon());
     m_container.setIcon(new ImageIcon(m_img));
-
     add(m_container);
-
-    m_algo = new Algorithm();
 
     repaint();
   }
@@ -63,6 +58,7 @@ class Canvas extends JPanel implements Runnable
 
   public void go(OptionsStruct os) // Start a new sequence.
   {
+    m_algo = new Vanilla();
     m_os = os;
     setupCanvas(os.width, os.height);
 
