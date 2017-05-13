@@ -60,6 +60,9 @@ class Canvas extends JPanel implements Runnable
   {
     switch (os.algorithm)
     {
+      case OptionsStruct.ALGO_CLOCKWISE:
+        m_algo = new Clockwise();
+        break;
       case OptionsStruct.ALGO_VANILLA:
       default:
         m_algo = new Vanilla();
