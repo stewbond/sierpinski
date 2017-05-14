@@ -12,6 +12,7 @@ public class OptionsStruct
   public final static int ALGO_NODUPS    = 1;
   public final static int ALGO_CLOCKWISE = 2;
   public final static int ALGO_NOADJACENT= 3;
+  public final static int ALGO_BARNSLEY  = 4;
 
   public OptionsStruct()
   {
