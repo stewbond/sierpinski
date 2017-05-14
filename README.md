@@ -29,3 +29,7 @@ $ java Main
 -- You can't select a vertex opposite (n/2 distance) from the previous one.
 -- You can't select a vertex 1 or n-1 spots away from the previous two selected vertices respectively. (Where n is the number of vertices)
 - Imagine if we could change this so that the user could define their own rules without a need to recompile!
+- I seem to get some div/0 exceptions thrown once in a while.  Not sure how that happens.
+- If we press "start" again, I think we spawn a new thread and leak the old one. Need to ensure that we tidy things up.
+- Add fern constants to the GUI so they can be configured
+- Add a few variations to the fern constants.
