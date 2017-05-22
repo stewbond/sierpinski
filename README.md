@@ -81,20 +81,28 @@ Sometimes you can find the perfect number of points for each algorithm to give a
 This algorithm is also quite simple but is significantly different from the others. It follows the equation `fm`:
 
 ```
-p(n+1) = fm(pn) = | a  b | * pn + |e|
+P(n+1) = fm(Pn) = | a  b | * Pn + |e|
                   | c  d |        |f|
 ```
-Where Matrix `A` is a 2x2 matrix with constant elements `a,b,c,d`, Vector `V` is a `1x2` vector with constant elements `e,f` and point `p` is a 1x2 vector with elements `x,y`.
+Where Matrix `A` is a 2x2 matrix with constant elements `a,b,c,d`, Vector `V` is a `1x2` vector with constant elements `e,f` and point `P` is a 1x2 vector with elements `x,y`.
 There are four sets of constants `a,b,c,d,e,f`, each one pertaining to a different variation of the equation.  The variation is randomly selected using a weighted probability `p`. 
 
-The initial condition, `p0`, is at `[0,0]`.  The constants and the weighted probability is shown in the table below: 
+The initial condition, `P0`, is at `[0,0]`.  The constants and the weighted probability is shown in the table below: 
 
 | function | a    | b    | c    | d    | e    | f    | p  |
 |----------|------|------|------|------|------|------|----|
-| f1(pn)   | 0.00 | 0.00 | 0.00 | 0.16 | 0.00 | 0.00 |0.01|
-| f2(pn)   | 0.85 | 0.04 | -.04 | 0.85 | 0.00 | 1.60 |0.85|
-| f3(pn)   | 0.20 | -.26 | 0.23 | 0.22 | 0.00 | 1.60 |0.07|
-| f4(pn)   | -.15 | 0.28 | 0.26 | 0.24 | 0.00 | 0.44 |0.07|
+| f0(pn)   | 0.00 | 0.00 | 0.00 | 0.16 | 0.00 | 0.00 |0.01|
+| f1(pn)   | 0.85 | 0.04 | -.04 | 0.85 | 0.00 | 1.60 |0.85|
+| f2(pn)   | 0.20 | -.26 | 0.23 | 0.22 | 0.00 | 1.60 |0.07|
+| f3(pn)   | -.15 | 0.28 | 0.26 | 0.24 | 0.00 | 0.44 |0.07|
+
+#### Algorithm
+
+```
+r = randomSelect(p[])
+Px = a[r] * Px_prev + b[r] * Py_prev + e[r]
+Py = c[r] * Px_prev + d[r] * Py_prev + f[r]
+```
 
 ![Fern](./img/fern.png?raw=true "Fern")
 
