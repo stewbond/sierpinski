@@ -117,7 +117,7 @@ You can tweak these numbers to make different shaped ferns.  Some configurations
     - Greyscale : Instead of drawing a black pixel, just increment the darkness of that pixel.
     - Figure out how to go 3D.
     - Scroll and Zoom
-- ** Refactoring **
+- **Refactoring**
     - Split OptionsStruct into something for the GUI (not exposed to Algorithms) and something for the `Algorithm`.
     - Reduce the amount of work new Algorithms need to do to be created.  Make them module and plugin-able.
 
