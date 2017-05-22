@@ -115,6 +115,8 @@ You can tweak these numbers to make different shaped ferns.  Some configurations
     - Add a "Randomize" setting to randomly select staring points
     - Separate GUI options from algorithmic options
     - Greyscale : Instead of drawing a black pixel, just increment the darkness of that pixel.
+    - Figure out how to go 3D.
+    - Scroll and Zoom
 
 ## Implementing Algorithms
 The application isn't totally optimized for adding algorithms.  You need to change a few files.  Here's what you need to do: 
