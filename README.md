@@ -117,6 +117,9 @@ You can tweak these numbers to make different shaped ferns.  Some configurations
     - Greyscale : Instead of drawing a black pixel, just increment the darkness of that pixel.
     - Figure out how to go 3D.
     - Scroll and Zoom
+- ** Refactoring **
+    - Split OptionsStruct into something for the GUI (not exposed to Algorithms) and something for the `Algorithm`.
+    - Reduce the amount of work new Algorithms need to do to be created.  Make them module and plugin-able.
 
 ## Implementing Algorithms
 The application isn't totally optimized for adding algorithms.  You need to change a few files.  Here's what you need to do: 
@@ -124,17 +127,19 @@ The application isn't totally optimized for adding algorithms.  You need to chan
 - `OptionsStruct.java`: Add `public final static int ALGO_XXXX` to the `OptionsStruct` class.
 - `Canvas.java`: Add a switch case to the `go` method to instantiate your algorithm.
 - `LeftPane.java`: Add a name for your algorithm to `String[] algorithms` in the constructor.  The index of the string corresponds to the value you gave the `static int` in the `OptionsStruct`.
-- `YourAlgorithm.java`: Make your own class. It must extend `Algorithm`.  You may instead extend one of the other algorithms if your class is similar.
+- `MyAlgorithm.java`: Make your own class. It must extend `Algorithm`.  You may instead extend one of the other algorithms if your class is similar and you can re-use the initialization from someone else.
 
 ### Instructions to Extend `Algorithm`
 You need to implement two functions: 
 ```java
-  public Vector<Point> Initialize(OptionsStruct os);
-  public Point Step(OptionsStruct os);
+class MyAlgorithm extends Algorithm {
+  public Vector<Point> Initialize(OptionsStruct os) { ... }
+  public Point Step(OptionsStruct os) { ... }
+}
 ```
-The first method will define initial conditions.  You may return as many points as you like for the initial drawing.  Points are in the pixel axis.  The width and height of the canvas are available in `OptionsStruct.width` and `OptionsStruct.height`.  The number of requested starting points is availabl in `OptionsStruct.startpoints`.  If you don't need that, then just don't use it.
+The first method, `Initialize`, will define initial conditions.  You may return as many points as you like for the initial drawing.  Points are in the pixel axis.  The width and height of the canvas are available in `OptionsStruct.width` and `OptionsStruct.height`.  The number of requested starting points is availabl in `OptionsStruct.startpoints`.  If you don't need that, then just don't use it.
 
-The second method will be called every iteration.  You are expected to calculate and return one new point to draw.
+The second method, `Step`, will be called every iteration.  You are expected to calculate and return one new point to draw.
 
 The following function is available to you.  This may be used to generate the location of the starting points for a simple symmetrical polygon.
 ```java
