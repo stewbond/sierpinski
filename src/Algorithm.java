@@ -20,7 +20,7 @@ public abstract class Algorithm
     else
     {
       double radius = Math.min(os.width, os.height ) / 2.0;
-      Vector<Point> points = generatePoints(os.startPoints, radius);
+      Vector<Point> points = generatePoints(os.startPoints, radius, os.rotation);
       for (int i = 0; i < points.size(); i++)
       {
         Point point = points.elementAt(i);
@@ -32,12 +32,12 @@ public abstract class Algorithm
     return startPoints;
   }
 
-  private Vector<Point> generatePoints(int number, double radius)
+  private Vector<Point> generatePoints(int number, double radius, float rotation)
   {
     Vector<Point> points = new Vector<Point>();
     for (int i = 0; i < number; i++)
     {
-      double angle = i * 2 * Math.PI / (double)number; // Ensure this is floating point
+      double angle = (i * 2 * Math.PI / (double)number) + Math.toRadians(rotation) ; // Ensure this is floating point
       points.add(new Point( (int)(Math.sin(angle) * radius),
                             (int)(Math.cos(angle) * radius )));
     }

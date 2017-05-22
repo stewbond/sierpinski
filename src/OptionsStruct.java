@@ -3,6 +3,7 @@ public class OptionsStruct
   public int   width;
   public int   height;
   public int   startPoints;
+  public float rotation;
   public float pixelSize;
   public int   pointsperiter;
   public int   dt;
@@ -19,6 +20,7 @@ public class OptionsStruct
     width  = 1000;
     height = 1000;
     startPoints = 3;
+    rotation = 0.0f;
     pixelSize = 1.0f;
     pointsperiter = 10;
     dt = 10;
