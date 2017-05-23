@@ -21,7 +21,7 @@ public class LeftPane extends JPanel
 
   public LeftPane(ActionListener _parent)
   {
-    String[] algorithms = {"Vanilla","No Duplicates","Clockwise","No Adjacents", "Barnsley Fern"};
+    String[] algorithms = {"Vanilla","No Duplicates","Clockwise","No Adjacents", "No Adjacent Ex", "Barnsley Fern"};
     delayLbl = new JLabel("Iteration period (ms)");
     delayBox = new JTextField("10");
     ptspiLbl = new JLabel("Points per iteration");
