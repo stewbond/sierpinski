@@ -168,4 +168,4 @@ The following function is available to you.  This may be used to generate the lo
 ```java
 protected Vector<Point> genericPolygon(OptionsStruct os)
 ```
-Take a look at `Vanilla.java`, `NoDups.java`, and `Fern.java` for a few examples or check out stewbond@8ce0d6c282accc25b449c3fa7ccef6e45b6b9a4f for the simple implementation that was needed to create the [No Adjacent (Ex)](./README.md#No-Adjacent-\(Ex\)) algorithm.
+Take a look at `Vanilla.java`, `NoDups.java`, and `Fern.java` for a few examples or check out [8ce0d6c](stewbond@8ce0d6c282accc25b449c3fa7ccef6e45b6b9a4f) for the simple implementation that was needed to create the [No Adjacent (Ex)](./README.md#no-adjacent-ex) algorithm.
