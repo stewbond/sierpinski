@@ -77,6 +77,21 @@ Of course, ensure that r wraps around correctly when checking for the next clock
 ![NoAdjacent](./img/noadj.png?raw=true "No Adjacent")
 
 Sometimes you can find the perfect number of points for each algorithm to give a very simple fractal.
+### No Adjacent (Ex)
+#### Initial condition
+The initial condition is similar to the Vanilla setup. Draw a set of `m` points where `m > 3`. We will call this set `A`.  Then place a point `p0`somewhere on the plane (it doesn't need to be between the points).
+#### Algorithm
+Draw a dot halfway between the previous dot and a randomly selected starting point.  The randomly selected starting point may not be **adjacent to the previous point, but may be the previous point**.
+```
+do
+  r = random() % m
+while ( r == r(n-1) + 1 || r == r(n-1) -1 )
+p(n+1) = (A[r] - pn) / 2 + pn
+```
+Of course, ensure that r wraps around correctly when checking for the next clockwise point.
+![NoAdjacentEx](./img/noadjex.png?raw=true "No Adjacent (Ex)")
+
+This algorithm is nearly identical to the *No Adjacent* algorithm with the exception that the previous starting point is a valid direction. In this case 4 points is a valid position, but you'll notice that it simply results in a line. This algorithm is interesting because it uses start patterns between all dots.
 ### Barnsley Fern
 This algorithm is also quite simple but is significantly different from the others. It follows the equation `fm`:
 
@@ -138,7 +153,7 @@ The application isn't totally optimized for adding algorithms.  You need to chan
 - `MyAlgorithm.java`: Make your own class. It must extend `Algorithm`.  You may instead extend one of the other algorithms if your class is similar and you can re-use the initialization from someone else.
 
 ### Instructions to Extend `Algorithm`
-You need to implement two functions: 
+You need to implement two functions:
 ```java
 class MyAlgorithm extends Algorithm {
   public Vector<Point> Initialize(OptionsStruct os) { ... }
@@ -153,4 +168,4 @@ The following function is available to you.  This may be used to generate the lo
 ```java
 protected Vector<Point> genericPolygon(OptionsStruct os)
 ```
-Take a look at `Vanilla.java`, `NoDups.java`, and `Fern.java` for a few examples.
+Take a look at `Vanilla.java`, `NoDups.java`, and `Fern.java` for a few examples or check out 8ce0d6c282accc25b449c3fa7ccef6e45b6b9a4f for the simple implementation that was needed to create the [No Adjacent (Ex)](./README.md#No-Adjacent-\(Ex\)) algorithm.
